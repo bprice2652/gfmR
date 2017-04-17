@@ -1,0 +1,15 @@
+Package: gfmR
+Type: Package
+Title: Implements Group Fused Multinomial Regression
+Version: 1.0
+Date: 2017-04-17
+Author: Brad Price
+Maintainer: brad.price@mail.wvu.edu
+Description: This package provides methodology to preform automatic response category
+combinations in multinomial logistic regression. There are functions for both cross valdiation
+and AIC for model selection.  The method provides regerssion coefficient estimates
+that may be useful for better understanding the true probaility distribution of
+multinomial logisitic regression when category probabilities are similar. 
+License: MIT + file LISENCE
+URL: https://www.r-project.org
+BugReports: https://gfmR.bugtracker.url
