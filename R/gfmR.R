@@ -49,8 +49,8 @@ CalcProbs<-function(Beta,X){
 #' CalcW
 #'@param Beta matrix regression coefficients
 #'@param X matrix of predictor valeus that creates probabilities
-#'@return denominators for probabilties and scalary for each observation
-#'@author Brad Price <brad.price@mail.wvu.edu?
+#'@return denominators for probabilties and scalars for each observation
+#'@author Brad Price <brad.price@mail.wvu.edu>
 #'Hidden from User
 
 CalcBottom<-function(X,Beta){
@@ -119,7 +119,7 @@ AllD<-function(C,p,H){
 #'@param Inits Is there an intialization
 #'@param iters the maximum number of iterations 
 #'@return Beta the regression coefficients from the update in the ADMM
-#'@author Brad Price <brad.price@mail.wvu.edu?
+#'@author Brad Price <brad.price@mail.wvu.edu>
 
 
 UpdateBeta<-function(Y2,X,Z,U,rho,H,tol=10^-7,Inits=FALSE,iters=10^3){
@@ -170,7 +170,7 @@ UpdateBeta<-function(Y2,X,Z,U,rho,H,tol=10^-7,Inits=FALSE,iters=10^3){
 #' @param mu stepzise adjustment
 #' @param TD stepsize adjustment
 #' @return Updated versions of Z, U, and rho. 
-#'@author Brad Price <brad.price@mail.wvu.edu?
+#' @author Brad Price <brad.price@mail.wvu.edu>
 
 
 UpdateZU<-function(BetaN,Z,U,D,lambda,rho,H,tol=10^-4,tol2=10^-4,mu=10,TD=2){
@@ -238,10 +238,21 @@ UpdateZU<-function(BetaN,Z,U,D,lambda,rho,H,tol=10^-4,tol2=10^-4,mu=10,TD=2){
   return(Out)
 }
 
+#' GroupFusedMulti
+#' @param Y Matrix of category counts for each Y 
+#' @param X Matrix of predictor variables of each X
+#' @param lambda tuning parameter for GFMR
+#' @param H Matrix representing set in L
+#' @param tol1 convergence tolerance for ADMM
+#' @param tol2 convergence tolderance for ADMM
+#' @param  TD update parameter for ADMM
+#' @param rho step-size parameter for ADMM
+#' @param tau1 ADMM adjustment of rho
+#' @param iter Max iterations of ADMM for convergence
+#' @result These report the GFMR estimates with tuning parammeter lambda, number of gorups, Z and U, and an indicator of converegence
+#' @author Brad Price <brad.price@mail.wvu.edu>
+## This is the workhorse function of GFMR and returns much information that a user will want to see. 
 
-
-
-### Y is a matrix where each 
 GroupFusedMulti<-function(Y,X,lambda,H,tol1=10^-7,tol2=10^-7,TD=2,rho=10^-8,tau1=10^-9,iter=1e3){
   C=dim(Y)[2]
   p=dim(X)[2]	
@@ -309,11 +320,27 @@ GroupFusedMulti<-function(Y,X,lambda,H,tol1=10^-7,tol2=10^-7,TD=2,rho=10^-8,tau1
   return(Output)
 }
 
+#' GroupFusedMultiL 
+#' @param Set is a set containing all elements of interest of GroupFusedMulti function
+#' @return a list function of GroupFusedMulti
+
 GroupFusedMultiL<-function(Set){
   
   AM=GroupFusedMulti(Set$Y,Set$X,lambda=Set$lambda,H=Set$H,rho=10^-8)
   Output=list(Groups=AM$Groups,NGroups=AM$NGroups,Coeff=AM$Coeff)
 }
+
+#' GFMR.cv
+#' @param Y matrix of response category combinations 
+#' @param X matrix of predictor category combinations
+#' @param lamb the lambda tuning parameters that would be needed for prediction
+#' @param sampID the identifiers for the cross validation sets for the cross validation function
+#' @param H the matrix identifying the penalty set
+#' @param n.cores if parallel needed specify the number of cores
+#' @return cross validaiton scores and standard deviations along with optimal results
+#'@author Brad Price <brad.price@mail.wvu.edu>
+
+## The workhorse function of the cross valdiation process. 
 
 GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
   br=matrix(0,5,length(lamb))
@@ -339,6 +366,17 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
 }
 
 
+#'FusedMultiAIC
+#' @param Y matrix of response category combinations 
+#' @param X matrix of predictor category combinations
+#' @param H the matrix identifying the penalty set
+#' @param Start the lambda tuning parameters that would be needed for prediction
+#' @param tau the update for the ADMM
+#' @param rho the step size parameter for the ADMM. 
+#' @return reuslting statitics and group structures of candidate values
+## Employs a gird search in a computationally in efficient way until at least one group structure with each possible number of groups is found.
+## Contains the AIC computaiton off the multinomial function under the assumption of equal probabilities.  Allows for a comparison under a different
+## number of response categories.  
 FusedMultiAIC<-function(Y,X,H,Start,tau=10^-9,rho1=1){
   BICVals<-rep(0,dim(Y)[2])
   Lambdas<-rep(0,dim(Y)[2])
