@@ -374,7 +374,7 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
 #' @param tau the update for the ADMM
 #' @param rho the step size parameter for the ADMM. 
 #' @return reuslting statitics and group structures of candidate values
-## Employs a gird search in a computationally in efficient way until at least one group structure with each possible number of groups is found.
+## Employs a gird search until at least one group structure with each possible number of groups is found.
 ## Contains the AIC computaiton off the multinomial function under the assumption of equal probabilities.  Allows for a comparison under a different
 ## number of response categories.  
 FusedMultiAIC<-function(Y,X,H,Start,tau=10^-9,rho1=1){
