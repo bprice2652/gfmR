@@ -316,9 +316,32 @@ GroupFusedMulti<-function(Y,X,lambda,H,tol1=10^-7,tol2=10^-7,TD=2,rho=10^-8,tau1
   
   
   
+  
   Output=list(Coeff=BetaRes, Approx=BetaN, Z=Z, lambda=lambda,Converge=CONV,NGroups=NGroups,Groups=Groups)
+  class(Output)="gfmR"
   return(Output)
 }
+
+
+### Generic print function to return 
+
+print.gfmR<-function(obj){
+  cat("Number of groups")
+  print(obj$NGroups)
+  cat("The corresponding regression coefficients are")
+  print(obj$BetaRes)
+}
+
+predict.gfmR<-function(obj,newdata,type="probs"){
+  if(type=="probs"){
+    return(CalcProbs(Beta = obj$Coeff[,-dim(obj$Coeff)[2]],X = cbind(1,newdata)))
+  }
+  if(type=="response"){
+    return(cbind(1,as.vector(newdata))%*%obj$Coeff)
+  }
+}
+
+
 
 #' GroupFusedMultiL 
 #' @param Set is a set containing all elements of interest of GroupFusedMulti function
@@ -362,9 +385,18 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
     br[,m]=res
   }
   out=list(vl=apply(br,2,mean),vl.sd=apply(br,2,sd),lambda=lamb,vl.mat=br)
+  class(out)<-"gfmR.cv"
   return(out)
 }
 
+print.gfmr.cv<-function(obj){
+  cat("Minimum Tuning Parameter")
+  return(obj$lambda[which(obj$vl==min(obj$vl)[1])])
+  cat("Validation Likelihood")
+  print(obj$vl)
+  cat("Standard Deviation of Validation Likelihood")
+  print(obj$vl.sd)
+}
 
 #'FusedMultiAIC
 #' @param Y matrix of response category combinations 
