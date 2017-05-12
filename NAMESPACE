@@ -1,1 +1,10 @@
-### Need to add something here
+## Modified 17-05-11
+
+export(GroupFusedMulti)
+export(GFMR.cv)
+S3method(print,gfmR)
+S3method(predict,gfmR)
+S3method(print, gfmR.cv)
+  
+  
+  ### Need to add something here

@@ -1,8 +1,8 @@
 Package: gfmR
 Type: Package
 Title: Implements Group Fused Multinomial Regression
-Version: 1.0
-Date: 2017-04-17
+Version: 1.0-0
+Date: 2017-05-11
 Author: Brad Price
 Maintainer: brad.price@mail.wvu.edu
 Depends: R (>= 3.1.0), parallel, nnet
@@ -13,5 +13,7 @@ that may be useful for better understanding the true probaility distribution of
 multinomial logisitic regression when category probabilities are similar. THESE METHODS
 ARE NOT RECCOMEND FOR A LARGE NUMBER OF PREDICTOR VARIABLES! 
 License: MIT + file LISENCE
+ByteComplie: yes
+LazyLoad: yes
 URL: https://www.r-project.org
 BugReports: https://gfmR.bugtracker.url
