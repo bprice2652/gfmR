@@ -1,25 +1,39 @@
-\name{predict.gfmr}
-\alias{predict.gfmr}
+\name{GroupFusedMulti}
+\alias{GroupFusedMulti}
 
-\title{ Predict method for group fused multinomial logistic regression  }
+\title{ Group Fused Multinomail Logistic Regression  }
 \description{
 This routine fits the group fused multinomial logistic regression model, which uses fusion shrinkage
 to automatically combine response categories.  
 }
 \usage{
-predict.gfmR<-function(obj,newdata,type=c("probs","response"))
-
+GroupFusedMulti(Y,X,lambda,H,tol1=10^-7,tol2=10^-7,TD=2,rho=10^-8,tau1=10^-9,iter=1e3)
 }
 \arguments{
-  \item{obj}{ A gfmr object which specficially is the output from the GroupFusedMulti function.}
-  \item{newdata}{value to be predicted in model matrix form}
-  \item{type}{Type of prediction, "probs" returns probabilities, while response returns log of the ratio of probabilties for baseline category}.
+  \item{Y}{ A matrix of response category counts where the columns represent the categories and rows represent the
+  observations.  Currently supproted for n=1.}
+  \item{X}{A matrix of predictor variables.  The columns represent predictors and rows represent observations.}
+  \item{lambda}{tuning parameter for fusion penalty}
+  \item{H}{An indicator matrix representing the edge set of the penalty set.  The matrix is square and symmetric with dimension number of reponse categories, and if two categories are in the penalty set a 1 should be in the row column combination.}
+  \item{tol1}{Convergence tolerance for ADMM}
+  \item{tol2}{Convergence tolerance of ADMM}
+  \item{TD}{Step size Adjustment for iterative step size}
+  \item{rho}{ADMM step-size parameter, iterative implementation}
+  \item{tau1}{The thresholding parameter to 0 for final estimates}
+  \item{iter}{Maximum number of iteratins of the algorithm}
 }
 \details{
-Prediction function for GFMR 
+Implements the ADMM algorithm for the group fused multinomial regression estimates proposed by Price et. al.  
 }
 \value{
-A vector or a matrix corresponding to type return. 
+The function returns a list:
+\item{Coeff}{Final coefficeint estimates for the gfmr model}
+\item{Approx}{Final iterates of beta before thresholding}
+\item{Z}{Final iterate of Z in the ADMM algorithm}
+\item{lambda}{Tuning Parameter}
+\item{Converge}{Indicator of algorithm convergence}
+\item{NGroups}{Number of groups in final estimates}
+\item{Groups}{The response category groups in the final estimates}
 }
 \references{
 Price, B.S, Geyer, C.J. and Rothman, A.J. "Automatic Response Category Combination in Multinomial Logistic Regression."  https://arxiv.org/abs/1705.03594. 

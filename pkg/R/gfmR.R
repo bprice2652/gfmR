@@ -325,14 +325,17 @@ GroupFusedMulti<-function(Y,X,lambda,H,tol1=10^-7,tol2=10^-7,TD=2,rho=10^-8,tau1
 
 ### Generic print function to return 
 
-print.gfmR<-function(obj){
+print.gfmR<-function(x,...){
+    obj=x
   cat("Number of groups")
   print(obj$NGroups)
   cat("The corresponding regression coefficients are")
   print(obj$BetaRes)
 }
 
-predict.gfmR<-function(obj,newdata,type="probs"){
+
+predict.gfmR<-function(object,newdata,type="probs",...){
+    obj=object
   if(type=="probs"){
     return(CalcProbs(Beta = obj$Coeff[,-dim(obj$Coeff)[2]],X = cbind(1,newdata)))
   }
@@ -374,13 +377,13 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
     S1<-vector("list",5)
     for(j in 1:5){
       set1=which(sampID==j)
-      S1[[j]]=list(Y=Y2[-set1,],X=X[-set1,],lambda=lamb[m],H=H)
+      S1[[j]]=list(Y=Y[-set1,],X=X[-set1,],lambda=lamb[m],H=H)
     }
     
     
     L2<-mclapply(S1,GroupFusedMultiL,mc.cores=n.cores)
     for(j in 1:5){
-      res=c(res,sum(log(CalcProbs(X=X[sampID==j,],Beta=L2[[j]]$Coeff[,-4])^Y2[sampID==j,])))
+      res=c(res,sum(log(CalcProbs(X=X[sampID==j,],Beta=L2[[j]]$Coeff[,-4])^Y[sampID==j,])))
     }
     br[,m]=res
   }
@@ -389,7 +392,8 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
   return(out)
 }
 
-print.gfmr.cv<-function(obj){
+print.gfmR.cv<-function(x,...){
+    obj=x
   cat("Minimum Tuning Parameter")
   return(obj$lambda[which(obj$vl==min(obj$vl)[1])])
   cat("Validation Likelihood")

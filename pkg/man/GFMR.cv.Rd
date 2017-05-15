@@ -6,8 +6,7 @@
 This routine implements K fold cross validation for group fused multinomial regression.  
 }
 \usage{
-GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...)
-
+GFMR.cv(Y,X,lamb,sampID,H,n.cores=1,...)
 }
 \arguments{
   \item{Y}{ A matrix of response category counts where the columns represent the categories and rows represent the
@@ -16,7 +15,7 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...)
   \item{lamb}{tuning parameter for fusion penalty}
   \item{sampID}{An identified or the sampleID for the cross validaiton routine.  Should take values 1:k and be user supplied.}
   \item{H}{An indicator matrix representing the edge set of the penalty set.  The matrix is square and symmetric with dimension number of reponse categories, and if two categories are in the penalty set a 1 should be in the row column combination.}
-  \item{ncores}{The number of cores for the mclapply function}
+  \item{n.cores}{The number of cores for the mclapply function}
   \item{...}{Other agurments for Group fused multinomial regression}
 }
 \details{

@@ -4,7 +4,7 @@ Title: Implements Group Fused Multinomial Regression
 Version: 1.0-0
 Date: 2017-05-11
 Author: Brad Price
-Maintainer: brad.price@mail.wvu.edu
+Maintainer: Brad Price <brad.price@mail.wvu.edu>
 Depends: R (>= 3.1.0), parallel, nnet, faraway
 Description: This package provides methodology to preform automatic response category
   combinations in multinomial logistic regression. There are functions for both cross valdiation
@@ -12,7 +12,7 @@ Description: This package provides methodology to preform automatic response cat
   that may be useful for better understanding the true probaility distribution of
   multinomial logisitic regression when category probabilities are similar. These methods are not
   recommended for a large number of predictor variables.  
-License: MIT + file LISENCE
+License: MIT + file LICENSE
 ByteComplie: yes
 LazyLoad: yes
 URL: https://www.r-project.org
