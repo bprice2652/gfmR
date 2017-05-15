@@ -7,11 +7,11 @@ Author: Brad Price
 Maintainer: brad.price@mail.wvu.edu
 Depends: R (>= 3.1.0), parallel, nnet, faraway
 Description: This package provides methodology to preform automatic response category
-combinations in multinomial logistic regression. There are functions for both cross valdiation
-and AIC for model selection.  The method provides regerssion coefficient estimates
-that may be useful for better understanding the true probaility distribution of
-multinomial logisitic regression when category probabilities are similar. These methods are not
-recommended for a large number of predictor variables.  
+  combinations in multinomial logistic regression. There are functions for both cross valdiation
+  and AIC for model selection.  The method provides regerssion coefficient estimates
+  that may be useful for better understanding the true probaility distribution of
+  multinomial logisitic regression when category probabilities are similar. These methods are not
+  recommended for a large number of predictor variables.  
 License: MIT + file LISENCE
 ByteComplie: yes
 LazyLoad: yes
