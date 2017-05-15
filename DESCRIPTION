@@ -5,7 +5,7 @@ Version: 1.0-0
 Date: 2017-05-11
 Author: Brad Price
 Maintainer: brad.price@mail.wvu.edu
-Depends: R (>= 3.1.0), parallel, nnet
+Depends: R (>= 3.1.0), parallel, nnet, faraway
 Description: This package provides methodology to preform automatic response category
 combinations in multinomial logistic regression. There are functions for both cross valdiation
 and AIC for model selection.  The method provides regerssion coefficient estimates

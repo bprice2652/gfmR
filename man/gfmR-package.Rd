@@ -13,24 +13,25 @@
 The DESCRIPTION file:
 \packageDESCRIPTION{gfmR}
 \packageIndices{gfmR}
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+The most improtant functions are GroupFusedMulti and GFMR.cv which implement methodology
+proposed by the manuscript "Automatic Response Category Combination in Multinomial Logistic Regression" by Brad Price, Charles Geyer, and Adam Rothman.  
 }
 \author{
-\packageAuthor{gfmR}
+\packageAuthor{Brad Price}
 
-Maintainer: \packageMaintainer{gfmR}
+Maintainer: \packageMaintainer{Brad Price brad.price@mail.wvu.edu}
 }
 \references{
-~~ Literature or other references for background information ~~
+Price, B.S, Geyer, C.J. and Rothman, A.J. "Automatic Response Category Combination in Multinomial Logistic Regression."  https://arxiv.org/abs/1705.03594. 
 }
 ~~ Optionally other standard keywords, one per line, from file KEYWORDS ~~
 ~~ in the R documentation directory ~~
-\keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+\keyword{ package
+models
+regression
+multivariate
 }
+
 \examples{
 ~~ simple examples of the most important functions ~~
 }
