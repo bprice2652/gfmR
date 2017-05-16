@@ -174,6 +174,8 @@ UpdateBeta<-function(Y2,X,Z,U,rho,H,tol=10^-7,Inits=FALSE,iters=10^3){
 
 
 UpdateZU<-function(BetaN,Z,U,D,lambda,rho,H,tol=10^-4,tol2=10^-4,mu=10,TD=2){
+  C=dim(BetaN)[2]
+  p=dim(BetaN)[1]
   U1=U
   Z1=Z
   Z1M=NULL
@@ -329,8 +331,8 @@ print.gfmR<-function(x,...){
     obj=x
   cat("Number of groups")
   print(obj$NGroups)
-  cat("The corresponding regression coefficients are")
-  print(obj$BetaRes)
+  cat("The corresponding groups are")
+  print(obj$Groups)
 }
 
 
@@ -352,7 +354,7 @@ predict.gfmR<-function(object,newdata,type="probs",...){
 
 GroupFusedMultiL<-function(Set){
   
-  AM=GroupFusedMulti(Set$Y,Set$X,lambda=Set$lambda,H=Set$H,rho=10^-8)
+  AM=GroupFusedMulti(Set$Y,Set$X,lambda=Set$lambda,H=Set$H,rho=Set$rho,iter=50,tol1=10^-4,tol2=10^-4)
   Output=list(Groups=AM$Groups,NGroups=AM$NGroups,Coeff=AM$Coeff)
 }
 
@@ -368,22 +370,22 @@ GroupFusedMultiL<-function(Set){
 
 ## The workhorse function of the cross valdiation process. 
 
-GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
-  br=matrix(0,5,length(lamb))
+GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,rho=10^-8,...){
+  br=matrix(0,max(sampID),length(lamb))
   for(m in 1:length(lamb)){
     cat(m,"out of", length(lamb),"values")
     res=NULL
     print(m)
-    S1<-vector("list",5)
-    for(j in 1:5){
+    S1<-vector("list",max(sampID))
+    for(j in 1:max(sampID)){
       set1=which(sampID==j)
-      S1[[j]]=list(Y=Y[-set1,],X=X[-set1,],lambda=lamb[m],H=H)
+      S1[[j]]=list(Y=Y[-set1,],X=X[-set1,],lambda=lamb[m],H=H,rho=rho)
     }
     
     
     L2<-mclapply(S1,GroupFusedMultiL,mc.cores=n.cores)
-    for(j in 1:5){
-      res=c(res,sum(log(CalcProbs(X=X[sampID==j,],Beta=L2[[j]]$Coeff[,-4])^Y[sampID==j,])))
+    for(j in 1:max(sampID)){
+      res=c(res,sum(log(CalcProbs(X=X[sampID==j,],Beta=L2[[j]]$Coeff[,-dim(Y)[2]])^Y[sampID==j,])))
     }
     br[,m]=res
   }
@@ -394,8 +396,8 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,...){
 
 print.gfmR.cv<-function(x,...){
     obj=x
-  cat("Minimum Tuning Parameter")
-  return(obj$lambda[which(obj$vl==min(obj$vl)[1])])
+  cat("Best Tuning Parameter")
+  return(obj$lambda[which(obj$vl==max(obj$vl)[1])])
   cat("Validation Likelihood")
   print(obj$vl)
   cat("Standard Deviation of Validation Likelihood")
