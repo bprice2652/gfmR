@@ -397,11 +397,11 @@ GFMR.cv<-function(Y,X,lamb,sampID,H,n.cores=1,rho=10^-8,...){
 print.gfmR.cv<-function(x,...){
     obj=x
   cat("Best Tuning Parameter")
-  return(obj$lambda[which(obj$vl==max(obj$vl)[1])])
+  print(obj$lambda[which(x$vl==max(x$vl)[1])])
   cat("Validation Likelihood")
-  print(obj$vl)
+  print(x$vl)
   cat("Standard Deviation of Validation Likelihood")
-  print(obj$vl.sd)
+  print(x$vl.sd)
 }
 
 #'FusedMultiAIC
