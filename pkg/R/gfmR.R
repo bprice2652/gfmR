@@ -133,12 +133,12 @@ UpdateBeta<-function(Y2,X,Z,U,rho,H,tol=10^-7,Inits=FALSE,iters=10^3){
   BetaN1=BetaN+1
   C=dim(BetaN)[2]
   it=0
-  while(sum(abs(BetaN-BetaN1))>tol && it<=iters){
+  while(sum(abs(BetaN-BetaN1)^2)/sum(abs(BetaN1)^2)>tol && it<=iters){
     BetaN1=BetaN
     for(k in 1:(C-1)){
       Beta2=BetaN[,k]
       W2=CalcW(BetaN[,-C],X,k)
-      Front=qr.solve(t(X)%*%W2$W%*%X+diag(2*sum(H[k,])*rho,p,p))
+      Front=solve(t(X)%*%W2$W%*%X+diag(2*sum(H[k,])*rho,p,p))
       One=t(X)%*%(Y2[,k]-W2$Probs)
       Two=rep(0,p)
       for(j in 1:C){
