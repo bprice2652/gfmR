@@ -15,7 +15,5 @@ Description: This package provides methodology to preform automatic response cat
   multinomial logisitic regression when category probabilities are similar. These methods are not
   recommended for a large number of predictor variables.  
 License: MIT + file LICENSE
-ByteComplie: yes
 LazyLoad: yes
 URL: https://www.r-project.org
-BugReports: https://gfmR.bugtracker.url
