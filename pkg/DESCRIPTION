@@ -16,4 +16,5 @@ Description: Software to implement methodology to preform automatic response cat
   recommended for a large number of predictor variables.  
 License: MIT + file LICENSE
 LazyLoad: yes
+NeedsCompilation: yes
 URL: https://www.r-project.org
