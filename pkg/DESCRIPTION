@@ -14,7 +14,7 @@ Description: Software to implement methodology to preform automatic response cat
   that may be useful for better understanding the true probaility distribution of
   multinomial logisitic regression when category probabilities are similar. These methods are not
   recommended for a large number of predictor variables.  
-License: MIT + file LICENSE
+License: GPL-2
 LazyLoad: yes
 NeedsCompilation: yes
 URL: https://www.r-project.org
