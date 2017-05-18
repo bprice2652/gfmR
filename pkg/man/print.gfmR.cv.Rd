@@ -1,7 +1,7 @@
 \name{print.gfmR.cv}
 \alias{print.gfmR.cv}
 
-\title{ print method for group fused multinomial logistic regression validation likelihood tuning prameter selection }
+\title{ print method for group fused multinomial logistic regression validation likelihood tuning parameter selection }
 \description{
 This routine fits the group fused multinomial logistic regression model, which uses fusion shrinkage
 to automatically combine response categories.  This specifically focuses on tuning parameter selection with validation likelihood.  
@@ -10,7 +10,7 @@ to automatically combine response categories.  This specifically focuses on tuni
 \method{print}{gfmR.cv}(x,...)
 }
 \arguments{
-  \item{x}{ A gfmr.cv object which specficially is the output from the GroupFusedMulti function.}
+  \item{x}{ A gfmr.cv object which specifically is the output from the GroupFusedMulti function.}
   \item{...}{Other arguments}
 }
 \details{

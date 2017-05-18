@@ -10,7 +10,7 @@ to automatically combine response categories.
 \method{print}{gfmR}(x,...)
 }
 \arguments{
-  \item{x}{ A gfmr object which specficially is the output from the GroupFusedMulti function.}
+  \item{x}{ A gfmr object which specifically is the output from the GroupFusedMulti function.}
   \item{...}{Other arguments}
 }
 \details{

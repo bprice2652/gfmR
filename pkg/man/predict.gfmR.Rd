@@ -10,9 +10,9 @@ to automatically combine response categories.
 \method{predict}{gfmR}(object,newdata,type="probs",...)
 }
 \arguments{
-  \item{object}{ A gfmr object which specficially is the output from the GroupFusedMulti function.}
+  \item{object}{ A gfmr object which specifically is the output from the GroupFusedMulti function.}
   \item{newdata}{value to be predicted in model matrix form}
-  \item{type}{Type of prediction, "probs" returns probabilities, while response returns log of the ratio of probabilties for baseline category}.
+  \item{type}{Type of prediction, "probs" returns probabilities, while response returns log of the ratio of probabilities for baseline category}.
   \item{...}{Other arguments}
 }
 \details{
