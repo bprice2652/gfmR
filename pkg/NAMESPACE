@@ -1,4 +1,4 @@
-## Modified 17-05-11
+## Modified 17-05-19
 import("faraway")
 import("nnet")
 import("parallel")
@@ -8,6 +8,5 @@ export(predict.gfmR)
 S3method(print,gfmR)
 S3method(predict,gfmR)
 S3method(print, gfmR.cv)
+importFrom("stats", "sd")  
   
-  
-  ### Need to add something here
