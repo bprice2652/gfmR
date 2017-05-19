@@ -1,7 +1,7 @@
 Package: gfmR
 Type: Package
 Title: Implements Group Fused Multinomial Regression
-Version: 1.0-0
+Version: 1.0-1
 Date: 2017-05-11
 Author: Brad Price
 Maintainer: Brad Price <brad.price@mail.wvu.edu>
@@ -9,10 +9,10 @@ Depends: R (>= 3.1.0), parallel, nnet, faraway
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Description: Software to implement methodology to preform automatic response category
-  combinations in multinomial logistic regression. There are functions for both cross valdiation
-  and AIC for model selection.  The method provides regerssion coefficient estimates
-  that may be useful for better understanding the true probaility distribution of
-  multinomial logisitic regression when category probabilities are similar. These methods are not
+  combinations in multinomial logistic regression. There are functions for both cross validation
+  and AIC for model selection.  The method provides regression coefficient estimates
+  that may be useful for better understanding the true probability distribution of
+  multinomial logistic regression when category probabilities are similar. These methods are not
   recommended for a large number of predictor variables.  
 License: GPL-2
 LazyLoad: yes
